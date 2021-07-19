@@ -62,8 +62,9 @@ def java_to_jsp(java_file):
     closing_idx = java_file.rindex('}')
     static_block += "\n\n" + java_file[main_close_idx+1:closing_idx]
 
-    # Insert the static block
-    jsp_file += "\n\n\n<%!\n" + static_block + "\n%>"
+    if len(static_block.strip()) != 0:
+        # Insert the static block
+        jsp_file += "\n\n\n<%!\n" + static_block + "\n%>"
 
     # Change System prints to out
     jsp_file = jsp_file.replace("System.out.println(", "out.print(")
